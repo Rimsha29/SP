@@ -1,33 +1,89 @@
 #!/bin/bash
+display ()
+{
 if [ $# -eq 0 ]
-then
-read -p "Enter num1": num
+	then
+	echo "no arguments entered"
+	exit 1
+fi
 
-read -p "Enter num2": num2
-else
-  num=$1
-  num2=$2
-  
-fi
-echo "sum of the numbers are":
-expr  $num + $num2 2>error.txt
-if [ $? -eq 0 ]
-then
-echo "subtracting of the numbers are":
-expr  $num - $num2 2>error.txt
-echo "Multipication of the numbers are":
-expr $num \* $num2 2>error.txt
-if [ $num2 -eq 0 ]
-then
-echo "invalid argument"
-else
-echo "Dividing of the numbers are":
-expr  $num / $num2 2>error.txt
-fi
-echo "Mod":
-expr $num % $num2 2>error.txt
-else 
-echo "invalid arguments"
+if [ $# -gt 6 ]
+	then
+	echo "You entered more than six arguments"
+	exit 1
 fi
 
 
+if [ $# -eq 3 -a $2 = -s ]
+then
+	num=$1
+	st=$3
+	for i in `seq $st 10`
+	do
+	echo " $num * $i= `expr $num \* $i` "
+	done
+exit 1
+fi
+
+
+
+if [ $# -eq 3 -a $2 = -e ]
+then
+	num=$1
+	end=$3
+	for i in `seq 1 $end`
+	do
+	echo " $num * $i= `expr $num \* $i` "
+	done
+	exit 1
+fi
+
+
+
+
+if [ $# -eq 1 ]
+then
+	num=$1
+	for i in `seq 1 10`
+	do
+	echo " $num * $i= `expr $num \* $i` "
+	done
+	exit 1
+fi
+
+
+
+if [ $# -eq 5 -a $2 = -s -a $4 = -e ]
+then
+	num=$1
+	st=$3
+	end=$5
+	for i in `seq $st $end`
+	do
+	echo " $num * $i= `expr $num \* $i` "
+	done
+	exit 1
+fi
+
+
+
+if [ $# -eq 6 -a $2 = -s -a $4 = -e -a $6 = -r ]
+then
+	num=$1
+	st=$3
+	end=$5
+	for i in `seq $st $end`
+	do
+	echo " $num * $i= `expr $num \* $i` "
+	done
+	echo " Printing in reverse "
+	while [ $end -ge $st ]
+		do
+			echo " $num * $end= `expr $num \* $end` "
+			end=`expr $end - 1 `
+		done
+	exit 1
+fi
+
+}
+display $1 $2 $3 $4 $5 $6 $7

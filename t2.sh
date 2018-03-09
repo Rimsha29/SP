@@ -1,20 +1,31 @@
 #!/bin/bash
-Filename=$1
-Username=$2
-	if [ $# -eq 3 ] || [ $# -eq 1 ]
-then
-	echo "invalid arguments"
-	
-else
-	set `ls -li  "$Filename"`
-		if [ $4 = $Username ]
+fname=$1
+#declare -i id
+set `pidof $1`
+cd /proc/$1
+#head status
+
+set `head status`
+if [ $7 = sleeping ]
 	then
-		echo "No cheating"
-	else
-		echo "cheating"
-	
-		fi
-	
-           
+	echo "sleeping"
+
+echo "Name: $fname"
+shift 7
+echo "pid: $6"
+echo "ppid: $8"
+
+
+else
+echo "Running"
+echo "Name: $fname"
+shift 7
+echo "pid: $6"
+echo "ppid: $8"
+
+
 fi
+
+
+
 
